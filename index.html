@@ -857,12 +857,6 @@
       color: var(--text-muted);
     }
 
-    .repo-meta {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-
     .repo-tech {
       font-family: var(--font-mono);
       font-size: 11px;
@@ -871,6 +865,23 @@
       background: rgba(0, 229, 153, 0.1);
       color: var(--brand-mint);
       border: 1px solid rgba(0, 229, 153, 0.2);
+    }
+
+    .repo-ver {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      padding: 4px 8px;
+      border-radius: 6px;
+      background: rgba(53, 191, 255, 0.12);
+      color: var(--accent-blue);
+      border: 1px solid rgba(53, 191, 255, 0.25);
+    }
+
+    .repo-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
     }
 
     .repo-stars {
@@ -1519,67 +1530,70 @@
           </div>
 
           <div class="repo-list" id="repo-list">
-            <!-- Repo 1 -->
-            <div class="repo-row" data-repo="flutter-package">
+            <!-- Repo 1: universal_file_viewer -->
+            <div class="repo-row" data-repo="universal_file_viewer">
               <div class="repo-main">
                 <div class="repo-name">
-                  <span>flutter-package</span>
-                  <span class="repo-tech">Dart</span>
+                  <span>universal_file_viewer</span>
+                  <span class="repo-ver">^0.1.4</span>
+                  <span class="repo-tech">Dart / Flutter</span>
                 </div>
-                <div class="repo-desc">Reusable layout components, animations & state utilities for Flutter apps.</div>
+                <div class="repo-desc">Universal file and document viewer package for Flutter apps across mobile and desktop platforms.</div>
               </div>
               <div class="repo-meta">
-                <span class="repo-stars">★ 1,420</span>
-                <button class="btn-copy-code" onclick="copySnippet('flutter pub add elvyn_forge')">Copy pubspec</button>
-                <a href="https://github.com/ElvynForge" target="_blank" rel="noopener" class="btn-secondary" style="padding:6px 12px; font-size:12px;">GitHub ↗</a>
+                <button class="btn-copy-code" onclick="copySnippet('flutter pub add universal_file_viewer')">Copy pub add</button>
+                <a href="https://pub.dev/packages/universal_file_viewer" target="_blank" rel="noopener" class="btn-secondary" style="padding:6px 12px; font-size:12px;">pub.dev ↗</a>
+                <a href="https://github.com/Shonu72/universal_file_viewer" target="_blank" rel="noopener" class="btn-secondary" style="padding:6px 12px; font-size:12px;">GitHub ↗</a>
               </div>
             </div>
 
-            <!-- Repo 2 -->
-            <div class="repo-row" data-repo="forge-ui-motion">
+            <!-- Repo 2: dynamic_icon_changer -->
+            <div class="repo-row" data-repo="dynamic_icon_changer">
               <div class="repo-main">
                 <div class="repo-name">
-                  <span>forge-ui-motion</span>
-                  <span class="repo-tech">TypeScript</span>
+                  <span>dynamic_icon_changer</span>
+                  <span class="repo-ver">^0.0.1</span>
+                  <span class="repo-tech">Dart / Flutter</span>
                 </div>
-                <div class="repo-desc">Lightweight spring motion engine optimized for modern web interfaces.</div>
+                <div class="repo-desc">Lightweight utility to dynamically change application launcher icons at runtime in Flutter apps.</div>
               </div>
               <div class="repo-meta">
-                <span class="repo-stars">★ 890</span>
-                <button class="btn-copy-code" onclick="copySnippet('npm install @elvynforge/motion')">Copy npm</button>
-                <a href="https://github.com/ElvynForge" target="_blank" rel="noopener" class="btn-secondary" style="padding:6px 12px; font-size:12px;">GitHub ↗</a>
+                <button class="btn-copy-code" onclick="copySnippet('flutter pub add dynamic_icon_changer')">Copy pub add</button>
+                <a href="https://pub.dev/packages/dynamic_icon_changer" target="_blank" rel="noopener" class="btn-secondary" style="padding:6px 12px; font-size:12px;">pub.dev ↗</a>
+                <a href="https://github.com/Shonu72/dynamic_icon_changer" target="_blank" rel="noopener" class="btn-secondary" style="padding:6px 12px; font-size:12px;">GitHub ↗</a>
               </div>
             </div>
 
-            <!-- Repo 3 -->
-            <div class="repo-row" data-repo="native-ffi-bridge">
+            <!-- Repo 3: surveyjs_flutter -->
+            <div class="repo-row" data-repo="surveyjs_flutter">
               <div class="repo-main">
                 <div class="repo-name">
-                  <span>native-ffi-bridge</span>
-                  <span class="repo-tech">Rust / C++</span>
+                  <span>surveyjs_flutter</span>
+                  <span class="repo-ver">^0.1.1</span>
+                  <span class="repo-tech">Dart / Flutter</span>
                 </div>
-                <div class="repo-desc">Zero-overhead interop binding generator for desktop and mobile apps.</div>
+                <div class="repo-desc">Native SurveyJS renderer, JSON questionnaire parser & validator component for Flutter.</div>
               </div>
               <div class="repo-meta">
-                <span class="repo-stars">★ 2,150</span>
-                <button class="btn-copy-code" onclick="copySnippet('cargo add ffi-bridge')">Copy cargo</button>
-                <a href="https://github.com/ElvynForge" target="_blank" rel="noopener" class="btn-secondary" style="padding:6px 12px; font-size:12px;">GitHub ↗</a>
+                <button class="btn-copy-code" onclick="copySnippet('flutter pub add surveyjs_flutter')">Copy pub add</button>
+                <a href="https://pub.dev/packages/surveyjs_flutter" target="_blank" rel="noopener" class="btn-secondary" style="padding:6px 12px; font-size:12px;">pub.dev ↗</a>
+                <a href="https://github.com/ElvynForge/surveyjs_flutter" target="_blank" rel="noopener" class="btn-secondary" style="padding:6px 12px; font-size:12px;">GitHub ↗</a>
               </div>
             </div>
 
-            <!-- Repo 4 -->
-            <div class="repo-row" data-repo="canvas-3d-lab">
+            <!-- Repo 4: theinspectai -->
+            <div class="repo-row" data-repo="theinspectai">
               <div class="repo-main">
                 <div class="repo-name">
-                  <span>canvas-3d-lab</span>
-                  <span class="repo-tech">JavaScript</span>
+                  <span>theinspectai</span>
+                  <span class="repo-tech">TypeScript / Node</span>
                 </div>
-                <div class="repo-desc">Micro 3D software rasterizer and math primitives for lightweight web graphics.</div>
+                <div class="repo-desc">AI-assisted code inspection framework and automated evaluation package for JavaScript and Node.js.</div>
               </div>
               <div class="repo-meta">
-                <span class="repo-stars">★ 640</span>
-                <button class="btn-copy-code" onclick="copySnippet('npm i canvas-3d-lab')">Copy npm</button>
-                <a href="https://github.com/ElvynForge" target="_blank" rel="noopener" class="btn-secondary" style="padding:6px 12px; font-size:12px;">GitHub ↗</a>
+                <button class="btn-copy-code" onclick="copySnippet('npm i theinspectai')">Copy npm i</button>
+                <a href="https://www.npmjs.com/package/theinspectai" target="_blank" rel="noopener" class="btn-secondary" style="padding:6px 12px; font-size:12px;">npm ↗</a>
+                <a href="https://github.com/ElvynForge/theinspectai" target="_blank" rel="noopener" class="btn-secondary" style="padding:6px 12px; font-size:12px;">GitHub ↗</a>
               </div>
             </div>
           </div>
@@ -1607,8 +1621,11 @@
         <div class="cta-box reveal">
           <div class="section-label" style="justify-content: center; margin-bottom: 16px;">05 / GET IN TOUCH</div>
           <h2 class="cta-headline">Have an idea worth forging?</h2>
-          <p class="cta-subtext">Let's turn it into something real.</p>
+          <p class="cta-subtext">Reach out to us directly at <a href="mailto:info@elvynforge.xyz" style="color: var(--brand-mint); text-decoration: underline;">info@elvynforge.xyz</a> or send a message below.</p>
           <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+            <a href="mailto:info@elvynforge.xyz" class="btn-secondary">
+              <span>info@elvynforge.xyz ✉️</span>
+            </a>
             <a href="https://github.com/ElvynForge" target="_blank" rel="noopener" class="btn-secondary">
               <span>Explore GitHub ↗</span>
             </a>
@@ -1626,7 +1643,7 @@
     <div class="modal-card">
       <button class="modal-close-btn" onclick="closeContactModal()">&times;</button>
       <h3 class="modal-title">Initiate Contact</h3>
-      <p class="modal-desc">Tell us about your product idea, collaboration, or question.</p>
+      <p class="modal-desc">Tell us about your product idea, collaboration, or question. You can also write to <a href="mailto:info@elvynforge.xyz" style="color: var(--brand-mint); text-decoration: underline;">info@elvynforge.xyz</a>.</p>
       <form id="contact-form" onsubmit="submitForm(event)">
         <div class="form-group">
           <label>Your Name</label>
@@ -1669,7 +1686,7 @@
         <ul class="footer-links">
           <li><a href="https://github.com/ElvynForge" target="_blank" rel="noopener">GitHub</a></li>
           <li><a href="#">Website</a></li>
-          <li><a href="mailto:hello@elvynforge.dev">Email</a></li>
+          <li><a href="mailto:info@elvynforge.xyz">info@elvynforge.xyz</a></li>
         </ul>
 
         <div>© 2026 Elvyn Forge</div>
