@@ -130,23 +130,53 @@ document.querySelectorAll('.spotlight-card').forEach(card => {
   });
 });
 
+// Helper: Stable canvas sizing with HiDPI (devicePixelRatio) support without layout thrashing
+function setupCanvasResize(cvs) {
+  function resize() {
+    const parent = cvs.parentElement;
+    if (!parent) return;
+    const dpr = window.devicePixelRatio || 1;
+    const w = parent.clientWidth;
+    const h = parent.clientHeight;
+    if (w > 0 && h > 0) {
+      const targetW = Math.floor(w * dpr);
+      const targetH = Math.floor(h * dpr);
+      // Only update buffer size if physical pixel dimensions change by > 2px
+      if (Math.abs(cvs.width - targetW) > 2 || Math.abs(cvs.height - targetH) > 2) {
+        cvs.width = targetW;
+        cvs.height = targetH;
+      }
+    }
+  }
+  resize();
+  window.addEventListener('resize', resize);
+}
+
 // --- 4. Interactive Project Visualizers ---
 // Canvas 1: Orbital Solar System
 function initSolarCanvas() {
   const cvs = document.getElementById('canvas-solar');
   if (!cvs) return;
   const c = cvs.getContext('2d');
+  setupCanvasResize(cvs);
   let t = 0;
 
   function draw() {
-    cvs.width = cvs.parentElement.clientWidth;
-    cvs.height = cvs.parentElement.clientHeight;
-    const cx = cvs.width / 2;
-    const cy = cvs.height / 2;
-    c.clearRect(0, 0, cvs.width, cvs.height);
+    const parent = cvs.parentElement;
+    const w = parent ? parent.clientWidth : 300;
+    const h = parent ? parent.clientHeight : 180;
+    if (w <= 0 || h <= 0) {
+      requestAnimationFrame(draw);
+      return;
+    }
+    const dpr = window.devicePixelRatio || 1;
+    c.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const cx = w / 2;
+    const cy = h / 2;
+    c.clearRect(0, 0, w, h);
 
     // Sun
-    c.shadowBlur = 30;
+    c.shadowBlur = 20;
     c.shadowColor = '#00E599';
     c.fillStyle = '#00E599';
     c.beginPath();
@@ -192,17 +222,25 @@ function initNexusCanvas() {
   const cvs = document.getElementById('canvas-nexus');
   if (!cvs) return;
   const c = cvs.getContext('2d');
+  setupCanvasResize(cvs);
   let t = 0;
 
   function draw() {
-    cvs.width = cvs.parentElement.clientWidth;
-    cvs.height = cvs.parentElement.clientHeight;
-    c.clearRect(0, 0, cvs.width, cvs.height);
+    const parent = cvs.parentElement;
+    const w = parent ? parent.clientWidth : 300;
+    const h = parent ? parent.clientHeight : 180;
+    if (w <= 0 || h <= 0) {
+      requestAnimationFrame(draw);
+      return;
+    }
+    const dpr = window.devicePixelRatio || 1;
+    c.setTransform(dpr, 0, 0, dpr, 0, 0);
+    c.clearRect(0, 0, w, h);
 
     const nodes = [
-      { x: cvs.width * 0.25, y: cvs.height * 0.4 },
-      { x: cvs.width * 0.5, y: cvs.height * 0.6 + Math.sin(t) * 10 },
-      { x: cvs.width * 0.75, y: cvs.height * 0.35 }
+      { x: w * 0.25, y: h * 0.4 },
+      { x: w * 0.5, y: h * 0.6 + Math.sin(t) * 10 },
+      { x: w * 0.75, y: h * 0.35 }
     ];
 
     // Draw Lines
@@ -233,22 +271,30 @@ function initFFICanvas() {
   const cvs = document.getElementById('canvas-ffi');
   if (!cvs) return;
   const c = cvs.getContext('2d');
+  setupCanvasResize(cvs);
   let offset = 0;
 
   function draw() {
-    cvs.width = cvs.parentElement.clientWidth;
-    cvs.height = cvs.parentElement.clientHeight;
-    c.clearRect(0, 0, cvs.width, cvs.height);
+    const parent = cvs.parentElement;
+    const w = parent ? parent.clientWidth : 300;
+    const h = parent ? parent.clientHeight : 180;
+    if (w <= 0 || h <= 0) {
+      requestAnimationFrame(draw);
+      return;
+    }
+    const dpr = window.devicePixelRatio || 1;
+    c.setTransform(dpr, 0, 0, dpr, 0, 0);
+    c.clearRect(0, 0, w, h);
 
     // Draw grid spectrum bars
     c.fillStyle = 'rgba(0, 229, 153, 0.18)';
     const barWidth = 14;
     const gap = 8;
-    const total = Math.floor(cvs.width / (barWidth + gap));
+    const total = Math.floor(w / (barWidth + gap));
 
     for (let i = 0; i < total; i++) {
-      let h = (Math.sin(i * 0.5 + offset) + 1.2) * (cvs.height * 0.3);
-      c.fillRect(i * (barWidth + gap) + 12, cvs.height - h - 16, barWidth, h);
+      let barH = (Math.sin(i * 0.5 + offset) + 1.2) * (h * 0.3);
+      c.fillRect(i * (barWidth + gap) + 12, h - barH - 16, barWidth, barH);
     }
 
     offset += 0.04;
@@ -262,18 +308,26 @@ function initMotionCanvas() {
   const cvs = document.getElementById('canvas-motion');
   if (!cvs) return;
   const c = cvs.getContext('2d');
+  setupCanvasResize(cvs);
   let step = 0;
 
   function draw() {
-    cvs.width = cvs.parentElement.clientWidth;
-    cvs.height = cvs.parentElement.clientHeight;
-    c.clearRect(0, 0, cvs.width, cvs.height);
+    const parent = cvs.parentElement;
+    const w = parent ? parent.clientWidth : 300;
+    const h = parent ? parent.clientHeight : 180;
+    if (w <= 0 || h <= 0) {
+      requestAnimationFrame(draw);
+      return;
+    }
+    const dpr = window.devicePixelRatio || 1;
+    c.setTransform(dpr, 0, 0, dpr, 0, 0);
+    c.clearRect(0, 0, w, h);
 
     c.strokeStyle = '#00E599';
     c.lineWidth = 2;
     c.beginPath();
-    for (let x = 0; x < cvs.width; x += 5) {
-      let y = cvs.height / 2 + Math.sin(x * 0.015 + step) * 35 * Math.cos(step * 0.5);
+    for (let x = 0; x < w; x += 5) {
+      let y = h / 2 + Math.sin(x * 0.015 + step) * 35 * Math.cos(step * 0.5);
       if (x === 0) c.moveTo(x, y);
       else c.lineTo(x, y);
     }
@@ -285,7 +339,140 @@ function initMotionCanvas() {
   draw();
 }
 
+// Canvas 5: Paari AI Resume & ATS Match Engine
+function initPaariCanvas() {
+  const cvs = document.getElementById('canvas-paari');
+  if (!cvs) return;
+  const c = cvs.getContext('2d');
+  setupCanvasResize(cvs);
+
+  let scanY = 30;
+  let scanDir = 1;
+  let scoreAngle = 0;
+
+  const keywords = ['AI Resume Match', 'ATS Fit Score', 'Cover Letter Gen', 'Software Engineers', 'System Design', 'React / Node'];
+
+  function draw() {
+    const parent = cvs.parentElement;
+    const w = parent ? parent.clientWidth : 300;
+    const h = parent ? parent.clientHeight : 180;
+
+    if (w <= 0 || h <= 0) {
+      requestAnimationFrame(draw);
+      return;
+    }
+
+    const dpr = window.devicePixelRatio || 1;
+    c.setTransform(dpr, 0, 0, dpr, 0, 0);
+    c.clearRect(0, 0, w, h);
+
+    // Subtle background HUD grid lines
+    c.strokeStyle = 'rgba(0, 229, 153, 0.05)';
+    c.lineWidth = 1;
+    const step = 24;
+    for (let x = 0; x < w; x += step) {
+      c.beginPath();
+      c.moveTo(x, 0);
+      c.lineTo(x, h);
+      c.stroke();
+    }
+    for (let y = 0; y < h; y += step) {
+      c.beginPath();
+      c.moveTo(0, y);
+      c.lineTo(w, y);
+      c.stroke();
+    }
+
+    // --- ANIMATED SCANNING LASER BEAM ---
+    const scanTop = 20;
+    const scanBottom = Math.max(scanTop + 10, h - 20);
+
+    scanY += 1.2 * scanDir;
+
+    if (scanY >= scanBottom) {
+      scanY = scanBottom;
+      scanDir = -1;
+    }
+
+    if (scanY <= scanTop) {
+      scanY = scanTop;
+      scanDir = 1;
+    }
+
+    // Gradient glow clamped strictly inside safe area [scanTop, scanBottom]
+    const glowHeight = 28;
+    const glowTop = Math.max(scanTop, scanY - glowHeight);
+
+    if (scanY > glowTop) {
+      const scanGrad = c.createLinearGradient(0, glowTop, 0, scanY);
+      scanGrad.addColorStop(0, 'rgba(0, 229, 153, 0)');
+      scanGrad.addColorStop(1, 'rgba(0, 229, 153, 0.12)');
+      c.fillStyle = scanGrad;
+      c.fillRect(0, glowTop, w, scanY - glowTop);
+    }
+
+    // Scan line beam with reduced shadowBlur (6px)
+    c.shadowBlur = 6;
+    c.shadowColor = '#00E599';
+    c.strokeStyle = 'rgba(0, 229, 153, 0.65)';
+    c.lineWidth = 2;
+    c.beginPath();
+    c.moveTo(0, scanY);
+    c.lineTo(w, scanY);
+    c.stroke();
+    c.shadowBlur = 0;
+
+    // Circular ATS Score Gauge (right side on large screens, center on small)
+    const gaugeCenterX = w > 480 ? w - 90 : w / 2;
+    const gaugeCenterY = h / 2;
+    const radius = Math.min(38, Math.max(20, h * 0.26));
+
+    // Gauge background ring
+    c.strokeStyle = 'rgba(255, 255, 255, 0.08)';
+    c.lineWidth = 6;
+    c.beginPath();
+    c.arc(gaugeCenterX, gaugeCenterY, radius, 0, Math.PI * 2);
+    c.stroke();
+
+    // Gauge progress ring (Target 98%)
+    const targetAngle = Math.PI * 1.76;
+    if (scoreAngle < targetAngle) scoreAngle += 0.03;
+
+    c.strokeStyle = '#00E599';
+    c.shadowBlur = 6;
+    c.shadowColor = '#00E599';
+    c.lineWidth = 6;
+    c.beginPath();
+    c.arc(gaugeCenterX, gaugeCenterY, radius, -Math.PI / 2, -Math.PI / 2 + scoreAngle);
+    c.stroke();
+    c.shadowBlur = 0;
+
+    // Gauge Text Score
+    c.fillStyle = '#F4F7FB';
+    c.font = '700 13px "JetBrains Mono", monospace';
+    c.textAlign = 'center';
+    c.textBaseline = 'middle';
+    c.fillText('98%', gaugeCenterX, gaugeCenterY - 4);
+    c.fillStyle = '#00E599';
+    c.font = '500 8px "JetBrains Mono", monospace';
+    c.fillText('ATS MATCH', gaugeCenterX, gaugeCenterY + 12);
+
+    // Floating AI status line
+    const kwX = w > 480 ? 40 : 20;
+    const kwY = h / 2 + 10;
+    const kwText = keywords[Math.floor(scoreAngle * 1.8) % keywords.length];
+    c.fillStyle = `rgba(53, 191, 255, ${Math.sin(scoreAngle * 3) * 0.3 + 0.7})`;
+    c.font = '500 11px "JetBrains Mono", monospace';
+    c.textAlign = 'left';
+    c.fillText(`⚡ ANALYSIS: ${kwText}`, kwX, kwY);
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+}
+
 window.addEventListener('load', () => {
+  initPaariCanvas();
   initSolarCanvas();
   initNexusCanvas();
   initFFICanvas();

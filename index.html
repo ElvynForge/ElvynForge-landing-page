@@ -103,12 +103,12 @@
 
         <div class="hero-metrics">
           <div class="metric-item">
-            <span class="metric-value">12+</span>
-            <span class="metric-label">Open Source Tools</span>
+            <span class="metric-value">Paari.online</span>
+            <span class="metric-label">Flagship SaaS</span>
           </div>
           <div class="metric-item">
-            <span class="metric-value">60 FPS</span>
-            <span class="metric-label">Motion Precision</span>
+            <span class="metric-value">12+</span>
+            <span class="metric-label">Open Source Tools</span>
           </div>
           <div class="metric-item">
             <span class="metric-value">100%</span>
@@ -213,8 +213,44 @@
         </div>
 
         <div class="work-grid">
-          <!-- Large Main Featured Card (60-65% width) -->
-          <div class="project-card reveal" data-category="experiment">
+          <!-- Flagship Product Card: Paari (paari.online) -->
+          <div class="project-card full-width reveal flagship-card" data-category="product">
+            <div class="project-media-frame paari-media">
+              <canvas id="canvas-paari"></canvas>
+              <div class="paari-overlay-content">
+                <img src="images/paari-logo.png" alt="Paari AI Logo" class="paari-card-logo">
+                <div class="paari-hud-tag">
+                  <span class="pulse-green-dot"></span>
+                  LIVE AT PAARI.ONLINE
+                </div>
+              </div>
+              <div class="placeholder-badge">AI RESUME & ATS ENGINE</div>
+            </div>
+            <div class="project-meta">
+              <div class="project-category">FLAGSHIP PRODUCT · AI · CAREER TECH</div>
+              <h3 class="project-title flex-title">
+                Paari <span class="title-badge">paari.online ↗</span>
+              </h3>
+              <p class="project-desc">
+                An AI-driven job matching and resume engine for software engineers. Upload your resume to match relevant roles, get instant ATS fit scoring, and generate tailored, editable cover letters.
+              </p>
+              <div class="project-tags">
+                <span class="tag tag-accent">AI Job Matching</span>
+                <span class="tag tag-accent">ATS Analytics</span>
+                <span class="tag">Resume Review</span>
+                <span class="tag">Cover Letter AI</span>
+                <span class="tag">Software Engineering</span>
+              </div>
+              <div class="project-actions" style="margin-top: 20px;">
+                <a href="https://paari.online/" target="_blank" rel="noopener" class="btn-integrated btn-sm">
+                  <span>Visit Paari — paari.online ↗</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Featured Video Experiment Card: Interactive Solar System -->
+          <div class="project-card full-width reveal" data-category="experiment">
             <div class="project-media-frame">
               <video id="video-solar" src="https://res.cloudinary.com/dj6ej7myo/video/upload/v1786600772/solar_t5o3z5.mov" autoplay loop muted playsinline controls></video>
               <button class="video-play-btn" onclick="toggleVideoPlay('video-solar', this)" aria-label="Toggle Play/Pause Video">
@@ -225,7 +261,9 @@
             </div>
             <div class="project-meta">
               <div class="project-category">EXPERIMENT · FLUTTER · 3D</div>
-              <h3 class="project-title">Interactive Solar System</h3>
+              <h3 class="project-title flex-title">
+                Interactive Solar System <span class="title-badge">GitHub ↗</span>
+              </h3>
               <p class="project-desc">A custom graphics and animation experiment with real-time planetary orbits, camera lighting and shader simulation.</p>
               <div class="project-tags">
                 <span class="tag">Flutter</span>
@@ -233,12 +271,16 @@
                 <span class="tag">GLSL Shaders</span>
                 <span class="tag">Canvas</span>
               </div>
+              <div class="project-actions" style="margin-top: 20px;">
+                <a href="https://github.com/ElvynForge/solar_system" target="_blank" rel="noopener" class="btn-secondary btn-sm">
+                  <span>View on GitHub ↗</span>
+                </a>
+              </div>
             </div>
           </div>
 
-          <!-- Stacked Side Cards -->
+          <!-- Unbuilt projects commented out for future releases
           <div class="stacked-projects">
-            <!-- Side Project 1 -->
             <div class="project-card reveal" data-category="product">
               <div class="project-media-frame">
                 <canvas id="canvas-nexus"></canvas>
@@ -256,7 +298,6 @@
               </div>
             </div>
 
-            <!-- Side Project 2 -->
             <div class="project-card reveal" data-category="opensource">
               <div class="project-media-frame">
                 <canvas id="canvas-ffi"></canvas>
@@ -275,7 +316,6 @@
             </div>
           </div>
 
-          <!-- Full Width Project Showcase -->
           <div class="project-card full-width reveal" data-category="experiment">
             <div class="project-media-frame">
               <canvas id="canvas-motion"></canvas>
@@ -293,6 +333,7 @@
               </div>
             </div>
           </div>
+          -->
         </div>
       </div>
     </section>
@@ -466,6 +507,7 @@
         </div>
 
         <ul class="footer-links">
+          <li><a href="https://paari.online/" target="_blank" rel="noopener" style="color: var(--brand-mint);">Paari ↗</a></li>
           <li><a href="https://github.com/ElvynForge" target="_blank" rel="noopener">GitHub</a></li>
           <li><a href="#">Website</a></li>
           <li><a href="mailto:info@elvynforge.xyz">info@elvynforge.xyz</a></li>
