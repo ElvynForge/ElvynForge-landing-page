@@ -535,11 +535,63 @@ function toggleMobileMenu() {
   document.getElementById('mobile-drawer').classList.toggle('active');
 }
 
-function submitForm(e) {
+async function submitForm(e) {
   e.preventDefault();
-  closeContactModal();
-  showToast("Message sent! We'll get back to you shortly.");
-  e.target.reset();
+  const form = e.target;
+  const submitBtn = form.querySelector('button[type="submit"]');
+  const originalBtnContent = submitBtn.innerHTML;
+
+  const nameInput = document.getElementById('contact-name');
+  const emailInput = document.getElementById('contact-email');
+  const messageInput = document.getElementById('contact-message');
+
+  const name = nameInput ? nameInput.value.trim() : '';
+  const email = emailInput ? emailInput.value.trim() : '';
+  const message = messageInput ? messageInput.value.trim() : '';
+
+  if (!name || !email || !message) return;
+
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = '<span>Sending Message... ⏳</span>';
+
+  try {
+    const response = await fetch('https://formsubmit.co/ajax/info@elvynforge.xyz', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        name: name,
+        email: email,
+        message: message,
+        _subject: `New Inquiry from ${name} (Elvyn Forge)`
+      })
+    });
+
+    if (response.ok) {
+      showToast("Message sent to info@elvynforge.xyz!");
+      form.reset();
+      closeContactModal();
+    } else {
+      const subject = encodeURIComponent(`Project Inquiry from ${name}`);
+      const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+      window.location.href = `mailto:info@elvynforge.xyz?subject=${subject}&body=${body}`;
+      showToast("Opened email client to dispatch message.");
+      form.reset();
+      closeContactModal();
+    }
+  } catch (err) {
+    const subject = encodeURIComponent(`Project Inquiry from ${name}`);
+    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+    window.location.href = `mailto:info@elvynforge.xyz?subject=${subject}&body=${body}`;
+    showToast("Opened email client to dispatch message.");
+    form.reset();
+    closeContactModal();
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = originalBtnContent;
+  }
 }
 
 // Keyboard ESC listener
